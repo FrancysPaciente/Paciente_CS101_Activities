@@ -1,1 +1,0 @@
-print("Hello, this is Group 1")
