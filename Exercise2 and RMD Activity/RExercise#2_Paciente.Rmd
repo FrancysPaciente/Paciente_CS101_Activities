@@ -21,10 +21,10 @@ a %% b
 a %/% b
 2^10
 ```
-##Question #1
+Question #1
 ##17 / 5 results to 3.4, showing decimal quotient. 17 %% 5 results to 2, showing the remainder. 17 %/% 5 results to 3, showing the whole number quotient.
 
-##Question #2
+Question #2
 ##Prediction is correct.
 
 ```{r}
@@ -56,6 +56,26 @@ Question #3
 
 Question #4
 ## typeof() returns low-level storage mode in memory. mode() returns high-level object property. mode() returns functional type category
+
+```{r}
+##Part C
+num_string <- "123" 
+num_val <- as.numeric(num_string) 
+typeof(num_val) # Output: "double" 
+class(num_val) # Output: "numeric" 
+mode(num_val) # Output: "numeric" 
+as.logical(0) # Output: FALSE 
+as.logical(1) # Output: TRUE 
+as.numeric(bad_string)
+```
+Question #5
+##To prevent the code from crashing and give warning instead.
+
+Question #6
+##as.logical(2) results to TRUE, same goes with as.logical(-1).
+```{r}
+##Part D
+```
 
 ## R Markdown
 
