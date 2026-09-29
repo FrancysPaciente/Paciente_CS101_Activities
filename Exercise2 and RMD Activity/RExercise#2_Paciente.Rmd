@@ -75,6 +75,11 @@ Question #6
 ##as.logical(2) results to TRUE, same goes with as.logical(-1).
 ```{r}
 ##Part D
+fname <- "Francys"
+lname <- "Paciente"
+cat(fname, lname)
+
+ffname <- 
 ```
 
 ## R Markdown
