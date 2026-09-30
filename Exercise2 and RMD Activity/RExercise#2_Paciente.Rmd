@@ -59,13 +59,19 @@ Question #4
 
 ```{r}
 ##Part C
-num_string <- "123" 
-num_val <- as.numeric(num_string) 
-typeof(num_val) # Output: "double" 
-class(num_val) # Output: "numeric" 
-mode(num_val) # Output: "numeric" 
-as.logical(0) # Output: FALSE 
-as.logical(1) # Output: TRUE 
+num_string <- "123"
+
+num <- as.numeric(num_string)
+
+typeof(num)
+class(num)
+mode(num)
+
+as.logical(0)
+as.logical(1)
+
+bad_string <- "hello123"
+
 as.numeric(bad_string)
 ```
 Question #5
@@ -75,29 +81,31 @@ Question #6
 ##as.logical(2) results to TRUE, same goes with as.logical(-1).
 ```{r}
 ##Part D
-fname <- "Francys"
-lname <- "Paciente"
+fname <- "Juan"
+lname <- "Dela Cruz"
+age <- 21
+ffname <- paste(fname, lname)
 cat(fname, lname)
 
-ffname <- 
+paste(fname, lname)
+paste0(fname, lname)
+
+paste(fname, lname, sep = "-")
+paste0(ffname, " is ", age, " years old.")
+```
+Question #7
+paste() prints a statement with space or separation. paste0() does not.
+
+Question #8
+It made no error. paste() combines values of different data types like character string or numbers. Variable "age" was converted from number to string when resulted to the final text.
+
+```{r}
+##Part E version 2
+5 + 5
 ```
 
-## R Markdown
+Question #9
+The error is the first 5 was a string. To fix it, the double quotations must be removed, converting it back to an integer. Now with both 5 + 5, it can correctly show the sum, which is 10.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Question #10
+The specified column was read as character data instead of integer or numeric. It should use typeof(), class(), and/or mode() instead to check the type. It will be converted next using as.numeric() and check for any errors before applying it to sum.
