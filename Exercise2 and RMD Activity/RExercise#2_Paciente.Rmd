@@ -78,7 +78,7 @@ Question #5
 ##To prevent the code from crashing and give warning instead.
 
 Question #6
-##as.logical(2) results to TRUE, same goes with as.logical(-1).
+##as.logical(2) results to TRUE, same goes with as.logical(1).
 ```{r}
 ##Part D
 fname <- "Juan"
