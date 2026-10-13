@@ -1,0 +1,22 @@
+---
+title: "RExercise#3_Paciente.Rmd"
+author: "Francys Chriel A. Paciente"
+date: "2026-10-13"
+output: html_document
+---
+```{r}
+#Part A
+
+scores <- c(88, 92, 79, 95, 84)
+subjects <- c("Math", "Science", "History", "PE")
+
+odds <- seq(1, 19, by = 2)
+odds
+seq(0, 1, length.out = 5)
+
+rep("A", 4)
+rep(c("A", "B"), each = 2)
+rep(c("A", "B"), times = 2)
+```
+
+
