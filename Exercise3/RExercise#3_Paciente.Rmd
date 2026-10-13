@@ -56,4 +56,56 @@ rep(c("A","B"), times = 2)
 #each repeats every element individually before moving to the next one. So “A” is repeated 2 times, then “B” is repeated 2 times.
 #times repeats the whole vector from start to finish. So the full sequence “A”, “B” is copied 2 times.
 
+#Question 3
+
+seq(1, 20, by = 2)
+seq(1, 20, length.out = 5)
+
+#by controls the step size.
+#length.out controls the number of elements you want.
+#Use by when the interval itself matters and is fixed. Use length.out when you need a set number of points that cover a range exactly, for example 100 evenly spaced x-values to plot a smooth curve, or 5 evenly spaced cutoffs between the minimum and maximum of a variable.
+
+#Question 4a
+
+vec_num <- 20:60
+
+#Question 4b
+
+mean(vec_num)
+
+#Question 4c
+
+length(vec_num)
+
+```{r}
+#Part B
+
+grades <- c(88, 92, 79, 95, 84)
+names(grades) <- c("Math", "Science", "English", "History", "PE")
+grades[3]
+grades[c(1, 4)]
+grades[c("Science", "PE")]
+
+grades[-c(1, 4)]
+
+grades[grades >= 85]
+```
+
+#Question 5
+#Negative indexing is useful when you know exactly which position to drop, such as removing the first row of a data vector that holds a header or a label by mistake, for example scores[-1] to discard a “total” value stored in the first position before computing the average of the rest. Logical indexing is the better tool when you don’t know the positions in advance and want to filter by a condition, such as picking out all students whose grades are at least 85 to give them honors recognition, using grades[grades >= 85].
+
+#Question 6
+#The grades vector only has 5 elements, so position 10 does not exist. Instead of throwing an error, R returns NA, which stands for a missing value. The name also shows as <NA> because there is no name attached to a position that doesn’t exist. R responds this way because out-of-range indexing on a vector is treated as a request for a value that isn’t there, and R’s design choice is to represent “nothing available” with NA rather than stop the program.
+
+```{r}
+#Part C
+
+x <- c(1, 2, 3, 4)
+y <- c(10, 20, 30, 40)
+
+
+```
+
+
+
 
