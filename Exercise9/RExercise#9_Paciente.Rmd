@@ -1,0 +1,94 @@
+---
+title: "RExercise#9_Paciente"
+author: "Francys Chriel A. Paciente"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r}
+#Part A
+
+#Question A1A
+shoe_size <- c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5,
+               10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5,
+               7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0)
+
+height <- c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0,
+            74.5, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0,
+            64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0)
+
+gender <- c("F", "F", "F", "F", "M", "F", "F", "M", "M", "F",
+            "M", "F", "M", "M", "M", "M", "F", "F", "M", "F",
+            "F", "M", "M", "F", "M", "M", "M", "M")
+
+shoesize <- data.frame(shoe_size, height, gender)
+
+write.csv(shoesize, "shoesize.csv", row.names = FALSE)
+
+shoesize
+
+#Question A1B
+shoesize <- read.csv("shoesize.csv")
+
+tail(shoesize, 5)
+
+#Question A1C
+str(shoesize)
+
+#Question A1D
+dim(shoesize)
+nrow(shoesize)
+ncol(shoesize)
+
+#Question A1E
+summary(shoesize)
+#str() tells you what the data looks like, while summary() tells you what the data contains statistically.
+
+#Question A1F
+males   <- shoesize[shoesize$gender == "M", ]
+females <- shoesize[shoesize$gender == "F", ]
+
+males
+females
+
+#Question A1G
+mean(shoesize$shoe_size)
+mean(shoesize$height)
+
+#Question A1H
+cor(shoesize$shoe_size, shoesize$height)
+#Yes, there is a moderate to strong positive relationship. A correlation of 0.66 indicates that as shoe size increases, height tends to increase as well.
+
+#Question A2
+shoesize$gender <- factor(shoesize$gender)
+
+levels(shoesize$gender)
+shoesize$gender
+
+#Question A3
+#Because the .Rmd file and its data files (like shoesize.csv) are stored together in the same folder. When R Markdown knits, it sets that folder as the working directory automatically, so read.csv("shoesize.csv") always works regardless of what folder the user’s R console was pointing to.
+
+#Question A4
+str(shoesize)
+#gender is now correctly a Factor, and shoe_size and height are numeric, which is expected. However, if a column like shoe_size were accidentally imported as character (e.g., due to a stray value like "8.5a" in the original file), any numeric operation: mean(), cor(), order(), would throw an error.
+
+#Question A5
+#head() only shows the first 6 rows, so problems at the bottom of the file go completely unnoticed. Common issues that head() alone would miss include: trailing empty rows, repeated headers at the end, corrupted last entries, or import cutoffs where the file didn’t fully load.
+
+#Question A6A
+cor(shoesize$shoe_size, shoesize$height)
+
+#Question A6B
+shoesize[shoesize$shoe_size >= 11, ]
+
+#Question A7
+# Mean height by gender
+mean(males$height)
+mean(females$height)
+
+# Mean shoe size by gender
+mean(males$shoe_size)
+mean(females$shoe_size)
+
+#Yes. The overall correlation of 0.66 is partly driven by gender acting as a grouping factor; males cluster at high shoe size + high height, females at low shoe size + low height.
+```
+
