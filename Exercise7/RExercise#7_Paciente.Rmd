@@ -1,0 +1,86 @@
+---
+title: "RExercise#7_Paciente"
+author: "Francys Chriel A. Paciente"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r}
+#Part A
+
+#Question 1
+
+Respondent<- 1:20
+Sex<-c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2)
+FathersOccupation<-c(1,3,3,3,1,2,3,1,1,1,3,2,1,3,3,1,3,1,2,1)
+PersonsAtHome<-c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6)
+SiblingsAtSchool<-c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2)
+TypesOfHouses<-c(1,2,3,1,1,3,3,1,2,3,2,3,2,2,3,3,3,3,3,2)
+
+length(Respondent)
+length(Sex)
+length(FathersOccupation)
+length(PersonsAtHome)
+length(SiblingsAtSchool)
+length(TypesOfHouses)
+
+survey<-data.frame(Respondent, Sex, FathersOccupation,
+                     PersonsAtHome, SiblingsAtSchool, TypesOfHouses)
+print(survey)
+
+#Question A1A
+str(survey)
+summary(survey)
+
+#Question A1B
+dim(survey)
+nrow(survey)
+ncol(survey)
+
+#Question A1C
+survey$Sex<-factor(survey$Sex,levels = c(1, 2),labels = c("Male", "Female"))
+
+survey$FathersOccupation<-factor(survey$FathersOccupation,levels = c(1, 2, 3),labels = c("Farmer", "Driver", "Others"))
+
+survey$TypesOfHouses<-factor(survey$TypesOfHouses,levels = c(1, 2, 3),labels = c("Wood", "Semi-Concrete", "Concrete"))
+
+str(survey)
+
+#Question A1D
+mean(survey$Respondent)
+mean(survey$PersonsAtHome)
+mean(survey$SiblingsAtSchool)
+
+#Question A1E
+survey[1:5, ]
+
+#Question A1F
+types_houses <- survey$TypesOfHouses
+types_houses
+
+#Question A1G
+survey[survey$Sex == "Male" & survey$FathersOccupation == "Farmer", ]
+
+#Question A1H
+survey[survey$Sex == "Female" & survey$SiblingsAtSchool >= 5, ]
+
+#Question A2
+#In survey data, every row represents one specific respondent, so each column must have exactly one value per person.
+
+#Question A3
+#Sex, FathersOccupation, and TypesOfHouses are nominal categories represented by numbers. PersonsAtHome and SiblingsAtSchool are actual counts. Treating Sex as a quantity is misleading because the numbers 1 and 2 are just labels with no numeric meaning.
+
+#Question A4
+#Someone unfamiliar with the legend would see a column of 1s and 2s and have no idea what they represent. They might assume 1 means a low score or a first group without any context.
+
+#Question A5
+nrow(survey[survey$Sex == "Male", ])
+sum(survey$Sex == "Male")
+#Only 3 out of 20 respondents are male. This very small sample size means any pattern observed among males, such as a common occupation or house type, could easily be a coincidence rather than a real trend.
+
+#Question A6
+#R stores data as numbers unless explicitly told otherwise. It has no way of knowing that the values 1, 2, and 3 in Sex represent categories rather than quantities, because the distinction exists only in the researcher’s understanding, not in the data itself.
+
+#Question A7
+#The mean of PersonsAtHome at 6.65 is meaningful because it represents an actual average count of people living in a household, which is a real and interpretable quantity. The mean of Sex at 1.85 is not meaningful because sex is a category encoded as 1 and 2, and the average of those codes has no real-world interpretation.
+```
+
