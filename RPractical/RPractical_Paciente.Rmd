@@ -3,8 +3,8 @@ title: "RPractical_Paciente"
 author: "Francys Chriel A. Paciente"
 date: "2026-11-10"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 #Part A1
 ```{r}
@@ -58,90 +58,188 @@ students<-data.frame(
   name = c("Alice", "Bruno", "Chen", "Dana", "Elif", "Farid", "Grace", "Hiro"),
   sex = c("F", "M", "M", "F", "F", "M", "F", "M"),
   midterm = c(78, 85, 92, 67, 74, 88, 95, 89),
-  final = c(82,79,96,71,80,9193,65),
+  final = c(82,79,96,71,80,91,93,65),
   attendance = c(95,88,100,72,90,85,98,60),
   stringAsFactors = FALSE
 )
 students
 ```
 
-
+#Part B2
 ```{r}
+str(students)
+dim(students)
+colnames(students)
+summary(students)
+
 ```
 
-
+#Part B3
 ```{r}
+students$average<-round((students$midterm + students$final)/ 2, 1)
+students
 ```
 
-
+#Part B4
 ```{r}
+students$passed<-students$average>=70 & students$attendance>= 75
+students
 ```
 
-
+#Part B5
 ```{r}
+students$standing<-
+  ifelse(students$average>=90, "Honors",
+         ifelse(students$average>=75, "Good", "Needs support"))
+students
 ```
 
-
+#Part B6
 ```{r}
+classify <- function(score) {
+  if (score>= 85) {
+    return("Distinction")
+  } else if (score >= 70) {
+    return("Merit")
+  } else if (score>= 50) {
+    return("Pass")
+  } else {
+    return("Fail")
+  }
+}
 ```
 
-
+#Part C1
 ```{r}
+new_students <- data.frame(
+id = c(9, 10),
+name = c("Ines", "Jamal"),
+sex = c("F", "M"),
+section = c("C", "A"),
+midterm = c(81, 70),
+final = c(84, 68),
+attendance = c(92, 80),
+stringsAsFactors = FALSE
+)
+
+new_students$average <- round((new_students$midterm + new_students$final) / 2, 1)
+new_students$passed <- new_students$average >= 70 & new_students$attendance >= 75
+new_students$standing <-
+ifelse(new_students$average >= 90, "Honors",
+ifelse(new_students$average >= 75, "Good", "Needs Support"))
+
+students_all <- dplyr::bind_rows(students, new_students)
+students_all
 ```
 
-
+#part C2
 ```{r}
+quiz <- c(8, 7, 10, 6, 7, 9, 10, 5, 8, 6)
+students_all <- cbind(students_all, quiz)
+class(students_all)
 ```
 
-
+#Part C3
 ```{r}
+m <- cbind(midterm = students_all$midterm, final = students_all$final)
+m <- rbind(m, mean = colMeans(m))
+m
 ```
 
-
+#Part C4
 ```{r}
+bad <- data.frame(wrong_col = 1)
+tryCatch(rbind(students, bad), error = function(e) { message("rbind failed: ", conditionMessage(e)); NULL })
+
+#Answer: When the column names are different, rbind may produce an error because it expects the data frames to have the same columns. The tryCatch function catches the error and displays a message saying rbind failed, instead of stopping the program.
 ```
 
-
+#Part D1
 ```{r}
+students_all$name
+
+students_all[["name"]]
+
+students_all[, "name"]
 ```
 
-
+#Part D2
 ```{r}
+students_all[2:5, c("name", "midterm", "final")]
 ```
 
-
+#Part D3
 ```{r}
+students_all[students_all$attendance > 90, ]
 ```
 
-
+#Part D4
 ```{r}
+subset(students_all,
+       sex == "F" & section %in% c("A", "C") & final >= 75,
+       select = c(name, section, final))
 ```
 
-
+#Part D5
 ```{r}
+students_all$name[which.max(students_all$average)]
+
+students_all$name[which.min(students_all$average)]
 ```
 
-
+#Part D6
 ```{r}
+students_all_sorted <- students_all[order(students_all$average,
+                                          decreasing = TRUE), ]
+
+head(students_all_sorted, 3)
 ```
 
-
+#Part E1
 ```{r}
+students_all$section <- factor(students_all$section)
+students_all$sex <- factor(students_all$sex)
+
+levels(students_all$section)
+levels(students_all$sex)
 ```
 
-
+#Part E2
 ```{r}
+table(students_all$sex)
+
+table(students_all$section)
+
+table(students_all$sex, students_all$section)
 ```
 
-
+#Part E3
 ```{r}
+as.integer(students_all$sex)
+# The integers represent the internal numerical codes assigned to each factor level.
+# They do not represent the actual values of sex.
 ```
 
-
+#Part E4
 ```{r}
+students_all$sex_label <- factor(
+  students_all$sex,
+  levels = c("F", "M"),
+  labels = c("Female", "Male")
+)
+
+students_all$sex_label
+
+levels(students_all$sex_label)
 ```
 
-
+#Part E5
 ```{r}
+summary(students_all$sex_label)
+
+mean(students_all$average[students_all$sex_label == "Female"])
+
+mean(students_all$average[students_all$sex_label == "Male"])
 ```
+
 
