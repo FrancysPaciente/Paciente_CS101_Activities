@@ -1,0 +1,129 @@
+---
+title: "RExercise#10_Paciente.Rmd"
+author: "Francys Chriel A. Paciente"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r}
+#Part A1A
+
+#a. Applies sum across rows (margin = 1). Row 1: 1+3+5 = 9, Row 2: 2+4+6 = 12.
+
+#b. Applies sum across columns (margin = 2). Col 1: 1+2 = 3, Col 2: 3+4 = 7, Col 3: 5+6 = 11.
+
+#c. lapply always returns a list, so class() confirms it is a list
+
+#d. sapply simplifies the result into a vector. It squares each element: 1²=1, 2²=4, 3²=9.
+
+#e. Counts the number of characters in each string and returns a named vector.
+
+#f. mapply applies the function to paired elements from two vectors simultaneously. 1×4=4, 2×5=10, 3×6=18.
+
+#g. tapply groups values by their label and applies sum. Group u: 10+30=40, Group v: 20+40=60.
+```
+
+```{r}
+#Part A2B1
+scores <- matrix(c(70, 85, 90,
+                   60, 75, 80,
+                   88, 92, 79),
+                 nrow = 3, byrow = TRUE,
+                 dimnames = list(c('Ana', 'Ben', 'Cara'), c('Math', 'Sci', 'Eng')))
+ 
+temps <- list(Mon = c(30, 32, 31), Tue = c(29, 33), Wed = c(31, 34, 35, 30))
+
+scores
+
+scores
+
+apply(scores, 1, mean)
+apply(scores, 2, max)
+apply(scores, 1, function(x) colnames(scores)[which.max(x)])
+```
+
+```{r}
+#Part A2B.2
+
+temps <- list(Mon = c(30, 32, 31), Tue = c(29, 33), Wed = c(31, 34, 35, 30))
+
+lapply(temps, mean)
+
+sapply(temps, length)
+
+vapply(temps, range, numeric(2))
+```
+
+```{r}
+#Part A3A
+
+mapply(function(p, r, n) p * (1 + r)^n,
+       p = c(1000, 2000),
+       r = c(0.05, 0.04),
+       n = c(2, 3))
+
+mapply(function(p, r, n) p * (1 + r)^n,
+       p = c(1000, 2000),
+       n = c(2, 3),
+       MoreArgs = list(r = 0.045))
+
+#MoreArgs passes r = 0.045 as a fixed constant to every call without recycling it as a vector argument, keeping the paired mapping of p and n intact.
+```
+
+```{r}
+#Part A4
+
+tapply(iris$Sepal.Length, iris$Species, mean)
+
+tapply(rep(1, nrow(mtcars)), list(mtcars$cyl, mtcars$am), sum)
+
+tapply(mtcars$mpg, mtcars$cyl, mean, na.rm = TRUE)
+
+#For part (a), virginica has the longest average sepal length at 6.588, followed by versicolor at 5.936, and setosa at 5.006. For part (b), 8-cylinder cars with automatic transmission dominate at 12 cars. For part (c), 4-cylinder cars have the best average fuel efficiency at 26.66 mpg, while 8-cylinder cars average only 15.10 mpg.
+```
+
+```{r}
+#Part A5A
+
+#mean() is called with no arguments instead of being passed as a function reference. mean() without arguments throws an error because it has nothing to compute on.
+
+sapply(list(a = 1:3, b = 4:6), mean)
+```
+
+```{r}
+#Part A5B
+
+apply(matrix(1:6, nrow = 3), 2, mean)
+
+#Margin is set to 1 which applies across rows, but the goal is one mean per column, so it should be 2.
+```
+
+```{r}
+#Part A5C
+
+#apply() coerces a data frame into a matrix first, which forces all columns to the same type, making class return "character" for every column instead of the true types.
+
+df <- data.frame(n = c(1, 2), s = c('a', 'b'))
+sapply(df, class)
+```
+
+```{r}
+#Part A6A
+
+#lapply() always returns a list, no matter what the function produces. sapply() does the same thing internally but tries to simplify the result into a vector or matrix when possible, though it can silently return a list if simplification fails. You would choose vapply() when you need guaranteed output type and shape, because it requires you to declare what each result should look like upfront and throws an error immediately if the function returns something unexpected
+```
+
+```{r}
+#Part A6B
+
+x <- c(10, 20, 30, 40)
+g <- c('a', 'b', 'a', 'b')
+
+lapply(split(x, g), mean)
+
+tapply(x, g, mean)
+
+#tapply() gives the same result in a single call. The difference is that lapply(split()) returns a list, while tapply() returns a named vector
+```
+
