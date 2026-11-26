@@ -3,8 +3,8 @@ title: "RExercise#10_Paciente.Rmd"
 author: "Francys Chriel A. Paciente"
 date: "`r Sys.Date()`"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 ```{r}
 #Part A1A
