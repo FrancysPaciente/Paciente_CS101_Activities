@@ -6,6 +6,55 @@ output:
   pdf_document: default
   html_document: default
 ---
+```{r}
+#Part A ExampleA
+
+score <- 78
+
+if (score >= 75) {
+  print("Passed")
+} else {
+  print("Failed")
+}
+```
+
+
+```{r}
+#Part A ExampleB
+
+score <- 86
+
+if (score >= 90) {
+  print("Excellent")
+} else if (score >= 80) {
+  print("Good")
+} else if (score >= 75) {
+  print("Fair")
+} else {
+  print("Needs Improvement")
+}
+```
+
+
+```{r}
+#Part A ExampleC
+
+scores <- c(92, 68, 75, 81, 59)
+ifelse(scores >= 75, "Passed", "Failed")
+```
+
+
+```{r}
+#Part A ExampleD
+
+grade <- 91
+attendance <- 95
+
+if (grade >= 90 & attendance >= 90) {
+  print("Honors candidate")
+}
+```
+
 
 ```{r}
 #Part B1
